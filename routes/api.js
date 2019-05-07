@@ -12,7 +12,7 @@ var expect = require('chai').expect;
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
 
-const MONGODB_CONNECTION_STRING = process.env.DB;
+const MONGODB_CONNECTION_STRING = process.env.DATABASE_URI;
 //Example connection: MongoClient.connect(MONGODB_CONNECTION_STRING, function(err, db) {});
 
 module.exports = function (app) {
@@ -25,6 +25,7 @@ module.exports = function (app) {
         // in case where something went wrong
         if(err) return console.log('Database error: '+err);
         // otherwise we collect all the books and send the response inside an array
+        console.log("Succefully connected to the database");
         db.collection('books')
           .aggregate([
             {$match: {}}, 
